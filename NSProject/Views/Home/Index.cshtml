@@ -1,0 +1,121 @@
+﻿@model IEnumerable<NSProject.Models.Person>
+@{
+    ViewBag.Title = "Add Patient";
+}
+
+
+<form method="post">
+    <fieldset>
+        <p>
+            <label for="fname">First name:</label>
+            <input type="text" id="fname" name="fname" value="@Request.Form["fname"]"><br />
+        </p>
+        <p>
+            <label for="lname">Last name:</label>
+            <input type="text" id="lname" name="lname" value="@Request.Form["lname"]"><br />
+        </p>
+        <p>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="@Request.Form["email"]"><br />
+        </p>
+        <p>
+            <label for="gender">Gender:</label>
+            <input type="text" id="gender" name="gender" value="@Request.Form["gender"]"><br />
+        </p>
+        <p>
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" value="@Request.Form["age"]"><br />
+        </p>
+        <p>
+            <label for="street">Street:</label>
+            <input type="text" id="street" name="street" value="@Request.Form["street"]"><br />
+        </p>
+        <p>
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" value="@Request.Form["city"]"><br />
+        </p>
+        <p>
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" value="@Request.Form["state"]"><br />
+        </p>
+        <p>
+            <label for="zip">Zip:</label>
+            <input type="number" id="zip" name="zip" value="@Request.Form["zip"]"><br />
+        </p>
+
+        <p>
+            <input type="submit" name="buttonSubmit" value="Add Patient" />
+        </p>
+    </fieldset>
+</form>
+
+
+@{
+    var fname = "";
+    var lname = "";
+    var email = "";
+    var gender = "";
+    var age = "";
+    var street = "";
+    var city = "";
+    var state = "";
+    var zip = "";
+
+    if (IsPost)
+    {
+        fname = Request.Form["fname"];
+        lname = Request.Form["lname"];
+        email = Request.Form["email"];
+        gender = Request.Form["gender"];
+        age = Request.Form["age"];
+        street = Request.Form["street"];
+        city = Request.Form["city"];
+        state = Request.Form["state"];
+        zip = Request.Form["zip"];
+
+        @*var db = Databases.Open("NSPro");
+        var cmd = "INSERT INTO Person (FirstName, LastName, Email, Gender, Age, Street, City, State, Zip) " +
+            "Values(@0, @1, @2, @3, @4, @5, @6, @7, @8)";
+        db.Execute(cmd, fname, lname, email, gender, age, street, city, state, zip);
+        Response.Redirect("Index");*@
+
+    }
+}
+
+<br />
+<br />
+
+<h2>List of the Patients</h2>
+<table class="table-bordered">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.personId)</th>
+            <th>@Html.DisplayNameFor(m => m.FirstName)</th>
+            <th>@Html.DisplayNameFor(m => m.LastName)</th>
+            <th>@Html.DisplayNameFor(m => m.Email)</th>
+            <th>@Html.DisplayNameFor(m => m.Gender)</th>
+            <th>@Html.DisplayNameFor(m => m.Age)</th>
+            <th>@Html.DisplayNameFor(m => m.Street)</th>
+            <th>@Html.DisplayNameFor(m => m.City)</th>
+            <th>@Html.DisplayNameFor(m => m.State)</th>
+            <th>@Html.DisplayNameFor(m => m.Zip)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var per in Model)
+        {
+            <tr>
+                <td>@per.personId</td>
+                <td>@per.FirstName</td>
+                <td>@per.LastName</td>
+                <td>@per.Email</td>
+                <td>@per.Gender</td>
+                <td>@per.Age</td>
+                <td>@per.Street</td>
+                <td>@per.City</td>
+                <td>@per.State</td>
+                <td>@per.Zip</td>
+            </tr>
+        }
+    </tbody>
+</table>
